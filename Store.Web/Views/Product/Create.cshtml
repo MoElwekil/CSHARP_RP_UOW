@@ -1,0 +1,49 @@
+﻿@model Product
+
+<div class="block">
+   <div class="inner">
+        <h1 style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">Create New Product</h1>
+
+
+        <form asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Product Name</label>
+                <input class="form-control" asp-for="Name" placeholder="Product Name">
+                <span asp-validation-for="Name" class="alert-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ProducedBy" class="form-label">Produced By</label>
+                <input class="form-control" asp-for="ProducedBy" placeholder="Produced By">
+                <span asp-validation-for="ProducedBy" class="alert-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Product Description</label>
+                <textarea class="form-control" asp-for="Description" placeholder="Product Description"></textarea>
+                <span asp-validation-for="Description" class="alert-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="InsertedBy" class="form-label">Inserted By</label>
+                <input class="form-control" asp-for="InsertedBy" placeholder="Inserted By">
+                <span asp-validation-for="InsertedBy" class="alert-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ProducedOn" class="form-label">Produced On</label>
+                <input class="form-control" asp-for="ProducedOn" placeholder="Produced On">
+                <span asp-validation-for="ProducedOn" class="alert-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="InsertedOn" class="form-label">Inserted On</label>
+                <input class="form-control" asp-for="InsertedOn" placeholder="Inserted On">
+                <span asp-validation-for="InsertedOn" class="alert-danger"></span>
+            </div>
+
+            <input type="submit" value="Submit" />
+        </form>
+   </div>
+
+</div>

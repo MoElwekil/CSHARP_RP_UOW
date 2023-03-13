@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Product>
+
+@{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Produced By</th>
+                <th scope="col">Description</th>
+                <th scope="col">Produced On</th>
+                <th scope="col">Inserted On</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Product product in Model)
+            {
+                <tr>
+                    <th scope="row">@product.ID</th>
+                    <td>@product.Name</td>
+                    <td>@product.ProducedBy</td>
+                    <td>@product.Description</td>
+                    <td>@product.ProducedOn.ToString("dd/MM/yyyy")</td>
+                    <td>@product.InsertedOn.ToString("dd/MM/yyyy")</td>
+                    <td><a asp-controller="Product" asp-action="Update" asp-route-ID="@product.ID" >Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    
+}
