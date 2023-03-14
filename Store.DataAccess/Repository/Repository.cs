@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Store.DataAccess.Repository
 {
-    internal class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ApplicationDbContext _context;
         internal DbSet<T> dbSet;

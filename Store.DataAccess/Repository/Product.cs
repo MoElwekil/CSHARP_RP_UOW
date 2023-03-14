@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.DataAccess.Repository
 {
-    internal class Product : Repository<Product>, IProductRepository
+    public class Product : Repository<Product>, IProductRepository
     {
         private readonly ApplicationDbContext _context;
 
