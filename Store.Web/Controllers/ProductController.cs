@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Store.Web.DbContexts;
-using Store.Web.Models;
+using Store.DataAccess.DbContexts;
+using Store.Models;
 
 namespace Store.Web.Controllers
 {
