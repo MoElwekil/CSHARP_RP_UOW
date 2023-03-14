@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Store.DataAccess.DbContexts;
+using Store.DataAccess.Repository.IRepository;
 using Store.Models;
 
 namespace Store.Web.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IProductRepository _context;
 
-        public ProductController(ApplicationDbContext context)
+        public ProductController(IProductRepository context)
         {
             _context = context;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Product> products = _context.Products;
+            IEnumerable<Product> products = _context.GetAll();
 
             return View(products);
         }
@@ -32,10 +33,10 @@ namespace Store.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                _context.Products.Add(product);
-                _context.SaveChanges();
+                _context.Add(product);
+                _context.Save();
 
-                Product p = _context.Products.FirstOrDefault(u => u.Name == product.Name);
+                Product p = _context.GetFirstOrDefault(u => u.Name == product.Name);
                 
                 if(p.ID > 0)
                 {
@@ -54,7 +55,7 @@ namespace Store.Web.Controllers
         public IActionResult Update(int ID) 
         {
 
-            Product product = _context.Products.FirstOrDefault(u => u.ID == ID);
+            Product product = _context.GetFirstOrDefault(u => u.ID == ID);
 
             if(product != null)
             {
@@ -70,8 +71,8 @@ namespace Store.Web.Controllers
         {
             if(ModelState.IsValid & product != null)
             {
-                _context.Products.Update(product);
-                _context.SaveChanges();
+                _context.Update(product);
+                _context.Save();
             }
 
             return View(product);
@@ -80,7 +81,7 @@ namespace Store.Web.Controllers
         [HttpGet]
         public IActionResult Delete(int ID)
         {
-            Product product = _context.Products.FirstOrDefault(u => u.ID == ID);
+            Product product = _context.GetFirstOrDefault(u => u.ID == ID);
 
             if(product != null)
             {
@@ -95,8 +96,8 @@ namespace Store.Web.Controllers
         {
             if(product != null)
             {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
+                _context.Delete(product);
+                _context.Save();
             }
 
             return View(product);
