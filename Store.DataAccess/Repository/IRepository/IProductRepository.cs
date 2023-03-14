@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.DataAccess.Repository
+namespace Store.DataAccess.Repository.IRepository
 {
     public interface IProductRepository : IRepository<Product>
     {

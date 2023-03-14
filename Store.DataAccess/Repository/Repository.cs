@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.DataAccess.DbContexts;
+using Store.DataAccess.Repository.IRepository;
 using System.Linq.Expressions;
 
 namespace Store.DataAccess.Repository

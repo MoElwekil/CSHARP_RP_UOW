@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Store.DataAccess.DbContexts;
+using Store.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllersWithViews();
 
 // DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IProductRepository, IProductRepository>();
 
 var app = builder.Build();
 
