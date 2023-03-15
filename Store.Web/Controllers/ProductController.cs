@@ -7,16 +7,16 @@ namespace Store.Web.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductRepository _context;
+        private readonly IUnitOfWork _unitOfwork;
 
-        public ProductController(IProductRepository context)
+        public ProductController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfwork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Product> products = _context.GetAll();
+            IEnumerable<Product> products = _unitOfwork.ProductRepository.GetAll();
 
             return View(products);
         }
@@ -33,10 +33,10 @@ namespace Store.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                _context.Add(product);
-                _context.Save();
+                _unitOfwork.ProductRepository.Add(product);
+                _unitOfwork.Save();
 
-                Product p = _context.GetFirstOrDefault(u => u.Name == product.Name);
+                Product p = _unitOfwork.ProductRepository.GetFirstOrDefault(u => u.Name == product.Name);
                 
                 if(p.ID > 0)
                 {
@@ -55,7 +55,7 @@ namespace Store.Web.Controllers
         public IActionResult Update(int ID) 
         {
 
-            Product product = _context.GetFirstOrDefault(u => u.ID == ID);
+            Product product = _unitOfwork.ProductRepository.GetFirstOrDefault(u => u.ID == ID);
 
             if(product != null)
             {
@@ -71,8 +71,8 @@ namespace Store.Web.Controllers
         {
             if(ModelState.IsValid & product != null)
             {
-                _context.Update(product);
-                _context.Save();
+                _unitOfwork.ProductRepository.Update(product);
+                _unitOfwork.Save();
             }
 
             return View(product);
@@ -81,7 +81,7 @@ namespace Store.Web.Controllers
         [HttpGet]
         public IActionResult Delete(int ID)
         {
-            Product product = _context.GetFirstOrDefault(u => u.ID == ID);
+            Product product = _unitOfwork.ProductRepository.GetFirstOrDefault(u => u.ID == ID);
 
             if(product != null)
             {
@@ -96,8 +96,8 @@ namespace Store.Web.Controllers
         {
             if(product != null)
             {
-                _context.Delete(product);
-                _context.Save();
+                _unitOfwork.ProductRepository.Delete(product);
+                _unitOfwork.Save();
             }
 
             return View(product);

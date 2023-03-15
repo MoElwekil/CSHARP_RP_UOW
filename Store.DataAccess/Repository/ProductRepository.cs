@@ -13,11 +13,6 @@ namespace Store.DataAccess.Repository
             _context = context;
         }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
         public void Update(Product product)
         {
             _context.Update(product);
